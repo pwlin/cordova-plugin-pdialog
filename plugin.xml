@@ -1,21 +1,21 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="io.github.pwlin.cordova.pdialog" version="1.0.0">
-    <name>Android Progress Dialog</name>
-    <description>An Android Progress Dialog Plugin for Cordova</description>
-    <license>MIT</license>
-    <engines>
-        <engine name="cordova" version=">=3.0.0" />
-    </engines>
-    <js-module src="www/PDialog.js" name="PDialog">
-        <clobbers target="cordova.plugins.pDialog" />
-    </js-module>
-    <!-- Android -->
-    <platform name="android">
-        <source-file src="src/android/io/github/pwlin/cordova/pdialog/PDialog.java" target-dir="src/io/github/pwlin/cordova/pdialog" />
-        <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="PDialog">
-                <param name="android-package" value="io.github.pwlin.cordova.pdialog.PDialog" />
-            </feature>
-        </config-file>
-    </platform>
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="io.github.pwlin.cordova.plugins.pdialog" version="1.0.0">
+	<name>Android Progress Dialog</name>
+	<description>An Android Progress Dialog Plugin for Cordova.</description>
+	<license>MIT</license>
+	<engines>
+		<engine name="cordova" version=">=3.0.0" />
+	</engines>
+	<js-module src="www/plugins.PDialog.js" name="PDialog">
+		<clobbers target="cordova.plugins.pDialog" />
+	</js-module>
+	<!-- Android -->
+	<platform name="android">
+		<source-file src="src/android/io/github/pwlin/cordova/plugins/pdialog/PDialog.java" target-dir="src/io/github/pwlin/cordova/plugins/pdialog" />
+		<config-file target="res/xml/config.xml" parent="/*">
+			<feature name="PDialog">
+				<param name="android-package" value="io.github.pwlin.cordova.plugins.pdialog.PDialog" />
+			</feature>
+		</config-file>
+	</platform>
 </plugin>
