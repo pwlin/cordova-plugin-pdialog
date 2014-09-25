@@ -21,7 +21,7 @@ import org.apache.cordova.CordovaResourceApi;
 //@SuppressWarnings("unused")
 public class PDialog extends CordovaPlugin {
 
-	private ProgressDialog pDialogObj;
+	private ProgressDialog pDialogObj = null;
 
 	/**
 	 * Executes the request and returns a boolean.
@@ -48,7 +48,35 @@ public class PDialog extends CordovaPlugin {
 				} else if ("dismiss".equals(action)) {
 					PDialog.this.dismiss();
 				} else if ("setProgress".equals(action)) {
-					PDialog.this.setProgress();
+					try {
+						PDialog.this.setProgress(args.getInt(0));
+					} catch (JSONException e) {
+						//e.printStackTrace();
+					}
+				} else if ("setProgressStyle".equals(action)) {
+					try {
+						PDialog.this.setProgressStyle(args.getString(0));
+					} catch (JSONException e) {
+						//e.printStackTrace();
+					}
+				} else if ("setTitle".equals(action)) {
+					try {
+						PDialog.this.setTitle(args.getString(0));
+					} catch (JSONException e) {
+						//e.printStackTrace();
+					}
+				} else if ("setMessage".equals(action)) {
+					try {
+						PDialog.this.setMessage(args.getString(0));
+					} catch (JSONException e) {
+						//e.printStackTrace();
+					}
+				} else if ("setCancelable".equals(action)) {
+					try {
+						PDialog.this.setCancelable(args.getBoolean(0));
+					} catch (JSONException e) {
+						//e.printStackTrace();
+					}
 				} else {
 					Log.e("CordovaLog", "PDialog: invalid action: " + action);
 				}
@@ -59,16 +87,52 @@ public class PDialog extends CordovaPlugin {
 
 	private void init(JSONArray args) throws JSONException {
 		JSONObject argsObj = new JSONObject(args.getString(0));
-		if (argsObj.has("param3")) {
-			Log.v("CordovaLog", "param3 exists.");
-			Log.v("CordovaLog", argsObj.getString("param3"));
-		} else {
-			Log.v("CordovaLog", "param3 does not exists.");
+		
+		int theme = ProgressDialog.THEME_DEVICE_DEFAULT_LIGHT;
+		if (argsObj.has("theme")) {
+			String themeArg = argsObj.getString("theme");
+			if ("TRADITIONAL".equals(themeArg)) {
+				theme = ProgressDialog.THEME_TRADITIONAL;
+			} else if ("DEVICE_DARK".equals(themeArg)) {
+				theme = ProgressDialog.THEME_DEVICE_DEFAULT_DARK;
+			} if ("HOLO_DARK".equals(themeArg)) {
+				theme = ProgressDialog.THEME_HOLO_DARK;
+			} if ("HOLO_LIGHT".equals(themeArg)) {
+				theme = ProgressDialog.THEME_HOLO_LIGHT;
+			}
 		}
-		Log.v("CordovaLog", "PDialog: init function");
-		PDialog.this.pDialogObj = new ProgressDialog(cordova.getActivity(), ProgressDialog.THEME_DEVICE_DEFAULT_DARK);
-		//PDialog.this.pDialogObj.setTitle("");
-		PDialog.this.pDialogObj.show();
+		
+		int style = ProgressDialog.STYLE_SPINNER;
+		if (argsObj.has("progressStyle")) {
+			if ("HORIZONTAL".equals(argsObj.getString("progressStyle"))) {
+				style = ProgressDialog.STYLE_HORIZONTAL;
+			}
+		}
+		
+		boolean cancelable = true;
+		if (argsObj.has("cancelable")) {
+			if (argsObj.getBoolean("cancelable") == false) {
+				cancelable = false;
+			}
+		}
+		
+		String title = "";
+		if (argsObj.has("title")) {
+			argsObj.getString("title");
+		}
+		
+		String message = "";
+		if (argsObj.has("message")) {
+			argsObj.getString("message");
+		}
+		
+		PDialog.this.pDialogObj = null;
+		PDialog.this.pDialogObj = new ProgressDialog(cordova.getActivity(), theme);
+		PDialog.this.pDialogObj.setProgressStyle(style);
+		PDialog.this.pDialogObj.setCancelable(cancelable);
+		PDialog.this.pDialogObj.setCanceledOnTouchOutside(cancelable);
+		PDialog.this.pDialogObj.setTitle(title);
+		PDialog.this.pDialogObj.setMessage(message);
 	}
 
 	private void show() {
@@ -79,8 +143,16 @@ public class PDialog extends CordovaPlugin {
 		PDialog.this.pDialogObj.dismiss();
 	}
 
-	private void setProgress() {
-
+	private void setProgress(int value) {
+		PDialog.this.pDialogObj.setProgress(value);
+	}
+	
+	private void setProgressStyle(String style) {
+		int progressStyle = ProgressDialog.STYLE_SPINNER;
+		if ("HORIZONTAL".equals(style)) {
+			progressStyle = ProgressDialog.STYLE_HORIZONTAL;
+		}
+		PDialog.this.pDialogObj.setProgressStyle(progressStyle);
 	}
 	
 	private void setTitle(CharSequence title) {
@@ -89,6 +161,11 @@ public class PDialog extends CordovaPlugin {
 	
 	private void setMessage(CharSequence message) {
 		PDialog.this.pDialogObj.setMessage(message);
+	}
+	
+	private void setCancelable(boolean flag) {
+		PDialog.this.pDialogObj.setCancelable(flag);
+		PDialog.this.pDialogObj.setCanceledOnTouchOutside(flag);
 	}
 	
 }
