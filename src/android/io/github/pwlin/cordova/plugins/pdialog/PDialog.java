@@ -156,6 +156,7 @@ public class PDialog extends CordovaPlugin {
 	 */
 	private void dismiss() {
 		PDialog.this.pDialogObj.dismiss();
+		PDialog.this.pDialogObj = null;
 	}
 	
 	/**
