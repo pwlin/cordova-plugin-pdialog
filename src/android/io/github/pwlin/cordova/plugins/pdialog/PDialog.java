@@ -1,24 +1,15 @@
 package io.github.pwlin.cordova.plugins.pdialog;
 
-import java.io.File;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.annotation.TargetApi;
 import android.app.ProgressDialog;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
 import android.util.Log;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
-import org.apache.cordova.PluginResult;
-import org.apache.cordova.CordovaResourceApi;
 
-//@SuppressWarnings("unused")
 public class PDialog extends CordovaPlugin {
 
 	private ProgressDialog pDialogObj = null;
@@ -84,7 +75,25 @@ public class PDialog extends CordovaPlugin {
 		});
 		return true;
 	}
-
+	
+	/**
+	 * Initializing the progress dialog and set various parameters
+	 * @param args
+	 * These are the valid options:
+	 * 
+	 * "theme": can be one of the following:
+	 * "TRADITIONAL", "DEVICE_DARK", "DEVICE_LIGHT" (default), "HOLO_DARK", "HOLO_LIGHT"
+	 * 
+	 * "progressStyle": can be one of the following:
+	 * "SPINNER" (default), "HORIZONTAL"
+	 *  
+	 *  "cancelable" : true (default) or false
+	 *  
+	 *  "title": title of the progress dialog (defaults to empty)
+	 *  
+	 *  "message": contents of the progress dialog (defaults to empty)
+	 * @throws JSONException
+	 */
 	private void init(JSONArray args) throws JSONException {
 		JSONObject argsObj = new JSONObject(args.getString(0));
 		
@@ -118,12 +127,12 @@ public class PDialog extends CordovaPlugin {
 		
 		String title = "";
 		if (argsObj.has("title")) {
-			argsObj.getString("title");
+			title = argsObj.getString("title");
 		}
 		
 		String message = "";
 		if (argsObj.has("message")) {
-			argsObj.getString("message");
+			message = argsObj.getString("message");
 		}
 		
 		PDialog.this.pDialogObj = null;
@@ -134,20 +143,37 @@ public class PDialog extends CordovaPlugin {
 		PDialog.this.pDialogObj.setTitle(title);
 		PDialog.this.pDialogObj.setMessage(message);
 	}
-
+	
+	/**
+	 * Show the progress dialog
+	 */
 	private void show() {
 		PDialog.this.pDialogObj.show();
 	}
-
+	
+	/**
+	 * Dismiss the progress dialog	
+	 */
 	private void dismiss() {
 		PDialog.this.pDialogObj.dismiss();
 	}
-
+	
+	/**
+	 * Set the value of the progress bar
+	 * @param value
+	 */
 	private void setProgress(int value) {
 		PDialog.this.pDialogObj.setProgress(value);
 	}
 	
+	/**
+	 * Set the value of the progress bar style
+	 * @param style
+	 * It can be one of the following:
+	 * "SPINNER" (default), "HORIZONTAL"
+	 */
 	private void setProgressStyle(String style) {
+		Log.v("CordovaLog", style);
 		int progressStyle = ProgressDialog.STYLE_SPINNER;
 		if ("HORIZONTAL".equals(style)) {
 			progressStyle = ProgressDialog.STYLE_HORIZONTAL;
@@ -155,14 +181,26 @@ public class PDialog extends CordovaPlugin {
 		PDialog.this.pDialogObj.setProgressStyle(progressStyle);
 	}
 	
+	/**
+	 * Set the title of the progress dialog
+	 * @param title
+	 */
 	private void setTitle(CharSequence title) {
 		PDialog.this.pDialogObj.setTitle(title);
 	}
 	
+	/**
+	 * Set the message of the progress dialog
+	 * @param message
+	 */
 	private void setMessage(CharSequence message) {
 		PDialog.this.pDialogObj.setMessage(message);
 	}
 	
+	/**
+	 * Set whether the progress dialog is calncelable or not
+	 * @param flag
+	 */
 	private void setCancelable(boolean flag) {
 		PDialog.this.pDialogObj.setCancelable(flag);
 		PDialog.this.pDialogObj.setCanceledOnTouchOutside(flag);

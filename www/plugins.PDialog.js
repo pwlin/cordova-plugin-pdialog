@@ -4,7 +4,7 @@ function PDialog() {};
 
 /**
  * Initializing the progress dialog and set various parameters
- * @param options
+ * @param {Object} args
  * These are the valid options:
  * 
  * "theme": can be one of the following:
@@ -25,13 +25,13 @@ function PDialog() {};
  *  	progressStyle: 'SPINNER',
  *  	cancelable : false,
  *  	title: 'Please Wait...',
- *  	message: 'Contacting server ...',
+ *  	message: 'Contacting server ...'
  *  });
  *     
  */
-PDialog.prototype.init = function(options) {
-	options = options || {};
-	exec(null, null, "PDialog", "init", [options]);
+PDialog.prototype.init = function(args) {
+	args = args || {};
+	exec(null, null, "PDialog", "init", [args]);
 	return this;
 };
 
@@ -53,22 +53,11 @@ PDialog.prototype.dismiss = function() {
 };
 
 /**
- * Set the value of the progress bar
+ * Set the value of the progress bar when progressStyle is "HORIZONTAL"
  * @param {Int} value
  */
 PDialog.prototype.setProgress = function(value) {
     exec(null, null, "PDialog", "setProgress", [value]);
-    return this;
-};
-
-/**
- * Set the value of the progress bar style
- * @param {String} style
- * It can be one of the following:
- * "SPINNER" (default), "HORIZONTAL"
- */
-PDialog.prototype.setProgressStyle = function(style) {
-    exec(null, null, "PDialog", "setProgressStyle", [style]);
     return this;
 };
 
