@@ -6,7 +6,7 @@ pDialog - A Native Android Progress Dialog Plugin for Cordova
 
 Requirements
 -------------
-- Android 4 or higher (**Make sure that you have at least `android:minSdkVersion="14"` in your AndroidManifest.xml**)
+- Android 4 or higher
 - Cordova 3.0 or higher
 
 Installation
@@ -15,6 +15,7 @@ Installation
     
 Simple Usage
 -------------
+show:
 
     cordova.plugins.pDialog.init({
         theme : 'HOLO_DARK',
@@ -23,10 +24,6 @@ Simple Usage
         title : 'Please Wait...',
         message : 'Contacting server ...'
     });
-
-show:
-
-    cordova.plugins.pDialog.show();
 
 dismiss:
 
@@ -62,12 +59,6 @@ These are the valid options:
         message : 'Contacting server ...'
     });
 
-###.show()
-
-Show the progress dialog.
-
-    cordova.plugins.pDialog.show();
-    
 ###.dismiss()
 
 Dismiss the progress dialog.
@@ -111,11 +102,33 @@ It is also possible to chain the functions instead of calling them one by one.
     cordova.plugins.pDialog.init({
         theme: 'HOLO_DARK',
         title: 'Please Wait...',
-        message : 'Connecting to server...',
+        message : 'Connecting to server1...',
         progressStyle: 'HORIZONTAL'
     })
-    .show()
-    .setProgress(25);
+    .setProgress(25)
+    .setMessage('Connecting to server2...');
 
+LICENSE
+--------
+The MIT License (MIT)
+
+Copyright (c) 2014 pwlin - pwlin05@gmail.com
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
     
