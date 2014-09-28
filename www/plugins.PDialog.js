@@ -22,7 +22,7 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
-var exec = require("cordova/exec");
+var exec = require('cordova/exec');
 
 function PDialog() {}
 
@@ -55,7 +55,7 @@ function PDialog() {}
  */
 PDialog.prototype.init = function (args) {
     args = args || {};
-    exec(null, null, "PDialog", "init", [args]);
+    exec(null, null, 'PDialog', 'init', args);
     return this;
 };
 
@@ -63,7 +63,7 @@ PDialog.prototype.init = function (args) {
  * Dismiss the progress dialog
  */
 PDialog.prototype.dismiss = function () {
-    exec(null, null, "PDialog", "dismiss", []);
+    exec(null, null, 'PDialog', 'dismiss', '');
     return this;
 };
 
@@ -72,7 +72,7 @@ PDialog.prototype.dismiss = function () {
  * @param {Int} value
  */
 PDialog.prototype.setProgress = function (value) {
-    exec(null, null, "PDialog", "setProgress", [value]);
+    exec(null, null, 'PDialog', 'setProgress', value);
     return this;
 };
 
@@ -81,7 +81,7 @@ PDialog.prototype.setProgress = function (value) {
  * @param {String} title
  */
 PDialog.prototype.setTitle = function (title) {
-    exec(null, null, "PDialog", "setTitle", [title]);
+    exec(null, null, 'PDialog', 'setTitle', title);
     return this;
 };
 
@@ -90,7 +90,7 @@ PDialog.prototype.setTitle = function (title) {
  * @param {String} message
  */
 PDialog.prototype.setMessage = function (message) {
-    exec(null, null, "PDialog", "setMessage", [message]);
+    exec(null, null, 'PDialog', 'setMessage', message);
     return this;
 };
 
@@ -99,7 +99,7 @@ PDialog.prototype.setMessage = function (message) {
  * @param {Boolean} flag
  */
 PDialog.prototype.setCancelable = function (flag) {
-    exec(null, null, "PDialog", "setCancelable", [flag]);
+    exec(null, null, 'PDialog', 'setCancelable', flag);
     return this;
 };
 
