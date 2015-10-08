@@ -227,6 +227,21 @@ public class PDialog extends CordovaPlugin {
 	}
 
 	/**
+	 * Set the progress max of the progress dialog
+	 * 
+	 * @param rawArgs
+	 */
+	private void setMax(final String max) {
+		Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				PDialog.pDialogObj.setMax(Integer.parseInt(max));
+			};
+		};
+		this.cordova.getActivity().runOnUiThread(runnable);
+	}
+
+	/**
 	 * Set whether the progress dialog is calncelable or not
 	 * 
 	 * @param rawArgs

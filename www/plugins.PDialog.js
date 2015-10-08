@@ -95,6 +95,15 @@ PDialog.prototype.setMessage = function (message) {
 };
 
 /**
+ * Set the progress max of the progress dialog
+ * @param {Int} max
+ */
+PDialog.prototype.setMax = function (max) {
+    exec(null, null, 'PDialog', 'setMax', max);
+    return this;
+};
+
+/**
  * Set whether the progress dialog is calncelable or not
  * @param {Boolean} flag
  */
