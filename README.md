@@ -11,7 +11,7 @@ Requirements
 
 Installation
 -------------
-    cordova plugin add https://github.com/pwlin/cordova-plugin-pdialog
+    cordova plugin add cordova-plugin-pdialog
     
 Simple Usage
 -------------
