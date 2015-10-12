@@ -44,7 +44,7 @@ function PDialog() {}
  *  "message": contents of the progress dialog (defaults to empty)
  *
  *  @example
- *  cordova.plugins.pDialog.init({
+ *  cordova.plugin.pDialog.init({
  *      theme : 'HOLO_DARK',
  *      progressStyle: 'SPINNER',
  *      cancelable : false,

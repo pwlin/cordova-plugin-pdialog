@@ -17,7 +17,7 @@ Simple Usage
 -------------
 show:
 
-    cordova.plugins.pDialog.init({
+    cordova.plugin.pDialog.init({
         theme : 'HOLO_DARK',
         progressStyle : 'SPINNER',
         cancelable : true,
@@ -27,7 +27,7 @@ show:
 
 dismiss:
 
-    cordova.plugins.pDialog.dismiss();
+    cordova.plugin.pDialog.dismiss();
 
 
 Functions
@@ -51,7 +51,7 @@ These are the valid options:
 
 `message`: contents of the progress dialog (defaults to empty)
 
-    cordova.plugins.pDialog.init({
+    cordova.plugin.pDialog.init({
         theme : 'HOLO_DARK',
         progressStyle : 'SPINNER',
         cancelable : true,
@@ -63,14 +63,14 @@ These are the valid options:
 
 Dismiss the progress dialog.
 
-    cordova.plugins.pDialog.dismiss();
+    cordova.plugin.pDialog.dismiss();
 
 ###.setProgress(_int_)
 
 Set the value of the progress bar when progressStyle is `HORIZONTAL`.
     
-    cordova.plugins.pDialog.init({progressStyle : 'HORIZONTAL', title: 'Please Wait...', message : 'Connecting to server...'});
-    cordova.plugins.pDialog.setProgress(25);
+    cordova.plugin.pDialog.init({progressStyle : 'HORIZONTAL', title: 'Please Wait...', message : 'Connecting to server...'});
+    cordova.plugin.pDialog.setProgress(25);
     
 ![pDialog2](http://i.imgur.com/7k2docz.png)
 
@@ -79,19 +79,19 @@ Set the value of the progress bar when progressStyle is `HORIZONTAL`.
 
 Set the title of the progress dialog.
     
-    cordova.plugins.pDialog.setTitle('Please Wait...');
+    cordova.plugin.pDialog.setTitle('Please Wait...');
     
 ###.setMessage(_message_)
 
 Set the message of the progress dialog
 
-    cordova.plugins.pDialog.setMessage('Connecting to server...');   
+    cordova.plugin.pDialog.setMessage('Connecting to server...');   
     
 ###.setCancelable(_boolean_)
 
 Set whether the progress dialog is calncelable or not (defaults to `true`)
 
-    cordova.plugins.pDialog.setCancelable(false); // The user can not cancel the progress dialog  
+    cordova.plugin.pDialog.setCancelable(false); // The user can not cancel the progress dialog  
     
 
 Chaining The Functions
@@ -99,7 +99,7 @@ Chaining The Functions
 
 It is also possible to chain the functions instead of calling them one by one.
 
-    cordova.plugins.pDialog.init({
+    cordova.plugin.pDialog.init({
         theme: 'HOLO_DARK',
         title: 'Please Wait...',
         message : 'Connecting to server1...',
