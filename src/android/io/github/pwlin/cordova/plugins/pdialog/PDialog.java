@@ -157,7 +157,7 @@ public class PDialog extends CordovaPlugin {
 					}
 				}
 
-                String format = "";
+				String format = "";
 				if (argsObj.has("format")) {
 					try {
 					    format = argsObj.getString("format");
