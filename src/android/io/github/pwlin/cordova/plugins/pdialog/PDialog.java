@@ -68,13 +68,15 @@ public class PDialog extends CordovaPlugin {
 			this.setMessage(rawArgs);
 		} else if (action.equals("setCancelable")) {
 			this.setCancelable(rawArgs);
-		}
+		} else if (action.equals("setProgressNumberFormat")) {
+            this.setProgressNumberFormat(rawArgs);
+        }
 		return true;
 	}
 
 	/**
 	 * Initializing the progress dialog and set various parameters
-	 * 
+	 *
 	 * @param rawArgs
 	 * @see https://github.com/pwlin/cordova-plugin-pdialog/blob/master/README.md
 	 */
@@ -155,12 +157,22 @@ public class PDialog extends CordovaPlugin {
 					}
 				}
 
+                String format = "";
+				if (argsObj.has("format")) {
+					try {
+					    format = argsObj.getString("format");
+					} catch (JSONException e) {
+						// e.printStackTrace();
+					}
+				}
+
 				PDialog.pDialogObj = new ProgressDialog(cordova.getActivity(), theme);
 				PDialog.pDialogObj.setProgressStyle(style);
 				PDialog.pDialogObj.setCancelable(cancelable);
 				PDialog.pDialogObj.setCanceledOnTouchOutside(cancelable);
 				PDialog.pDialogObj.setTitle(title);
 				PDialog.pDialogObj.setMessage(message);
+				PDialog.pDialogObj.setProgressNumberFormat(format);
 				PDialog.pDialogObj.show();
 			};
 		};
@@ -182,7 +194,7 @@ public class PDialog extends CordovaPlugin {
 
 	/**
 	 * Set the value of the progress bar when progress style is "HORIZONTAL"
-	 * 
+	 *
 	 * @param rawArgs
 	 */
 	private void setProgress(final String rawArgs) {
@@ -198,7 +210,7 @@ public class PDialog extends CordovaPlugin {
 
 	/**
 	 * Set the title of the progress dialog
-	 * 
+	 *
 	 * @param rawArgs
 	 */
 	private void setTitle(final String title) {
@@ -213,7 +225,7 @@ public class PDialog extends CordovaPlugin {
 
 	/**
 	 * Set the message of the progress dialog
-	 * 
+	 *
 	 * @param rawArgs
 	 */
 	private void setMessage(final String message) {
@@ -228,7 +240,7 @@ public class PDialog extends CordovaPlugin {
 
 	/**
 	 * Set the progress max of the progress dialog
-	 * 
+	 *
 	 * @param rawArgs
 	 */
 	private void setMax(final String max) {
@@ -243,7 +255,7 @@ public class PDialog extends CordovaPlugin {
 
 	/**
 	 * Set whether the progress dialog is calncelable or not
-	 * 
+	 *
 	 * @param rawArgs
 	 */
 	private void setCancelable(final String rawArgs) {
@@ -258,4 +270,18 @@ public class PDialog extends CordovaPlugin {
 		this.cordova.getActivity().runOnUiThread(runnable);
 	}
 
+    /**
+	 * Change the format of the small text showing current and maximum units of progress.
+	 *
+	 * @param rawArgs
+	 */
+	private void setProgressNumberFormat(final String format) {
+		Runnable runnable = new Runnable() {
+			@Override
+			public void run() {
+				PDialog.pDialogObj.setProgressNumberFormat(format);
+			};
+		};
+		this.cordova.getActivity().runOnUiThread(runnable);
+	}
 }
