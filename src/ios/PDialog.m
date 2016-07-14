@@ -13,6 +13,7 @@
 #define DIALOG_WIDTH 180.0f
 #define DIALOG_PADDING 8.0f
 #define DIALOG_HEIGHT 90.0f
+#define ANIMATION_TIME 0.3f
 
 @implementation PDialog
 
@@ -26,12 +27,18 @@
 		animated = NO;
 	}
 	
+	if( oldDialogContainer )
+	{
+		[oldDialogContainer removeFromSuperview];
+		oldDialogContainer = nil;
+	}
+	
 	NSDictionary *args = [command.arguments objectAtIndex:0];
 	
 	UIView *root = self.webView.superview;
 	
-    dialogContainer = [[UIView alloc] initWithFrame:root.bounds];
-    [root addSubview:dialogContainer];
+	dialogContainer = [[UIView alloc] initWithFrame:root.bounds];
+	[root addSubview:dialogContainer];
 	
 	[dialogContainer addSubview:[self background:root.bounds]];
 	
@@ -47,10 +54,10 @@
 	if( animated )
 	{
 		dialogContainer.alpha = 0.0f;
-		[UIView animateWithDuration:0.5f animations:^
-		{
-			dialogContainer.alpha = 1.0f;
-		}];
+		[UIView animateWithDuration:ANIMATION_TIME animations:^
+		 {
+			 dialogContainer.alpha = 1.0f;
+		 }];
 	}
 	
 	if( !singleFingerTap )
@@ -85,9 +92,9 @@
 - (UIView *) spinnerDialog:(CGRect) rect title:(NSString *) title message:(NSString *) message
 {
 	UIView *dialog = [[UIView alloc] initWithFrame:CGRectMake(
-				(rect.size.width - DIALOG_WIDTH) * 0.5f,
-				(rect.size.height - DIALOG_HEIGHT) * 0.5f,
-				DIALOG_WIDTH, DIALOG_HEIGHT)];
+															  (rect.size.width - DIALOG_WIDTH) * 0.5f,
+															  (rect.size.height - DIALOG_HEIGHT) * 0.5f,
+															  DIALOG_WIDTH, DIALOG_HEIGHT)];
 	
 	dialog.backgroundColor = [UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.8f];
 	dialog.layer.cornerRadius = 5.0f;
@@ -191,20 +198,21 @@
 
 - (void) dismiss
 {
-	if( false && dialogContainer )
+	if( dialogContainer )
 	{
-		UIView *temp = dialogContainer;
+		oldDialogContainer = dialogContainer;
 		dialogContainer = titleLabel = messageLabel = progressBar = nil;
 		
-		[UIView animateWithDuration:0.5f
+		[UIView animateWithDuration:ANIMATION_TIME
 						 animations:^
-		{
-			temp.alpha = 0.0f;
-		}
+		 {
+			 oldDialogContainer.alpha = 0.0f;
+		 }
 						 completion:^(BOOL finished)
-		{
-			[temp removeFromSuperview];
-		}];
+		 {
+			 if( oldDialogContainer )
+				 [oldDialogContainer removeFromSuperview];
+		 }];
 	}
 }
 
@@ -224,7 +232,7 @@
 {
 	if( titleLabel )
 	{
-		titleLabel.text = [[command.arguments objectAtIndex:0] stringValue];
+		titleLabel.text = [command.arguments objectAtIndex:0];
 	}
 	
 	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@""];
@@ -235,7 +243,7 @@
 {
 	if( messageLabel )
 	{
-		messageLabel.text = [[command.arguments objectAtIndex:0] stringValue];
+		messageLabel.text = [command.arguments objectAtIndex:0];
 	}
 	
 	CDVPluginResult* pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:@""];

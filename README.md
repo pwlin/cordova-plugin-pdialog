@@ -1,4 +1,4 @@
-pDialog - A Native Android Progress Dialog Plugin for Cordova
+pDialog - A Native Android and iOS Progress Dialog Plugin for Cordova
 ======================
 
 ![pDialog1](http://i.imgur.com/LmAZa2d.png)

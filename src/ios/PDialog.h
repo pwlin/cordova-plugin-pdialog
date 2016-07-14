@@ -13,6 +13,7 @@
 	UITapGestureRecognizer *singleFingerTap;
 	
     UIView *dialogContainer;
+	UIView *oldDialogContainer;
 	UILabel *titleLabel;
 	UILabel *messageLabel;
 	UIProgressView *progressBar;
