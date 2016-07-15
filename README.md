@@ -8,6 +8,7 @@ Requirements
 -------------
 - Android 4 or higher
 - Cordova 3.0 or higher
+- iOS 7.0 or higher
 
 Installation
 -------------
@@ -40,6 +41,7 @@ These are the valid options:
 
 `theme`: can be one of the following:
 `TRADITIONAL`, `DEVICE_DARK`, `DEVICE_LIGHT` (default), `HOLO_DARK`, `HOLO_LIGHT`
+* themes are not supported by iOS.
 
 
 `progressStyle`: can be one of the following:
