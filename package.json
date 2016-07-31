@@ -1,11 +1,12 @@
 {
   "name": "cordova-plugin-pdialog",
-  "version": "2.0.1",
+  "version": "2.1.1",
   "description": "An Android Progress Dialog Plugin for Cordova",
   "cordova": {
     "id": "cordova-plugin-pdialog",
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   },
   "repository": {
@@ -14,7 +15,8 @@
   },
   "keywords": [
     "ecosystem:cordova",
-    "cordova-android"
+    "cordova-android",
+    "cordova-ios"
   ],
   "engines": [
     {

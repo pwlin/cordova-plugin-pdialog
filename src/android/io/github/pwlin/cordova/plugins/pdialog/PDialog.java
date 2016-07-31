@@ -24,10 +24,11 @@ package io.github.pwlin.cordova.plugins.pdialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONArray;
 
 import android.app.ProgressDialog;
 
-//import android.util.Log;
+// import android.util.Log;
 
 import org.apache.cordova.CordovaInterface;
 import org.apache.cordova.CordovaPlugin;
@@ -47,27 +48,28 @@ public class PDialog extends CordovaPlugin {
 	 * @return Whether the action was valid.
 	 */
 	@Override
-	public boolean execute(String action, String rawArgs, CallbackContext callbackContext) {
+	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 		/*
 		 * Don't run any of these if the current activity is finishing in order
 		 * to avoid android.view.WindowManager$BadTokenException crashing the
 		 * app.
 		 */
+		
 		if (this.cordova.getActivity().isFinishing()) {
 			return true;
 		}
 		if (action.equals("init")) {
-			this.init(rawArgs);
+			this.init(args.getJSONObject(0));
 		} else if (action.equals("dismiss")) {
 			this.dismiss();
 		} else if (action.equals("setProgress")) {
-			this.setProgress(rawArgs);
+			this.setProgress(args.getInt(0));
 		} else if (action.equals("setTitle")) {
-			this.setTitle(rawArgs);
+			this.setTitle(args.getString(0));
 		} else if (action.equals("setMessage")) {
-			this.setMessage(rawArgs);
+			this.setMessage(args.getString(0));
 		} else if (action.equals("setCancelable")) {
-			this.setCancelable(rawArgs);
+			this.setCancelable(args.getBoolean(0));
 		}
 		return true;
 	}
@@ -75,10 +77,10 @@ public class PDialog extends CordovaPlugin {
 	/**
 	 * Initializing the progress dialog and set various parameters
 	 * 
-	 * @param rawArgs
+	 * @param argsObj
 	 * @see https://github.com/pwlin/cordova-plugin-pdialog/blob/master/README.md
 	 */
-	private void init(final String rawArgs) {
+	private void init(final JSONObject argsObj ) {
 		final CordovaInterface cordova = this.cordova;
 		Runnable runnable = new Runnable() {
 			@Override
@@ -87,13 +89,7 @@ public class PDialog extends CordovaPlugin {
 					PDialog.pDialogObj.dismiss();
 					PDialog.pDialogObj = null;
 				}
-				JSONObject argsObj = null;
-				try {
-					argsObj = new JSONObject(rawArgs);
-				} catch (JSONException e) {
-					// e.printStackTrace();
-				}
-
+				
 				int theme = 5; // ProgressDialog.THEME_DEVICE_DEFAULT_LIGHT
 				if (argsObj.has("theme")) {
 					String themeArg = null;
@@ -183,13 +179,12 @@ public class PDialog extends CordovaPlugin {
 	/**
 	 * Set the value of the progress bar when progress style is "HORIZONTAL"
 	 * 
-	 * @param rawArgs
+	 * @param value
 	 */
-	private void setProgress(final String rawArgs) {
+	private void setProgress(final int value) {
 		Runnable runnable = new Runnable() {
 			@Override
 			public void run() {
-				int value = Integer.parseInt(rawArgs);
 				PDialog.pDialogObj.setProgress(value);
 			};
 		};
@@ -199,7 +194,7 @@ public class PDialog extends CordovaPlugin {
 	/**
 	 * Set the title of the progress dialog
 	 * 
-	 * @param rawArgs
+	 * @param title
 	 */
 	private void setTitle(final String title) {
 		Runnable runnable = new Runnable() {
@@ -214,7 +209,7 @@ public class PDialog extends CordovaPlugin {
 	/**
 	 * Set the message of the progress dialog
 	 * 
-	 * @param rawArgs
+	 * @param message
 	 */
 	private void setMessage(final String message) {
 		Runnable runnable = new Runnable() {
@@ -229,7 +224,7 @@ public class PDialog extends CordovaPlugin {
 	/**
 	 * Set the progress max of the progress dialog
 	 * 
-	 * @param rawArgs
+	 * @param max
 	 */
 	private void setMax(final String max) {
 		Runnable runnable = new Runnable() {
@@ -244,13 +239,12 @@ public class PDialog extends CordovaPlugin {
 	/**
 	 * Set whether the progress dialog is calncelable or not
 	 * 
-	 * @param rawArgs
+	 * @param flag
 	 */
-	private void setCancelable(final String rawArgs) {
+	private void setCancelable(final boolean flag) {
 		Runnable runnable = new Runnable() {
 			@Override
 			public void run() {
-				boolean flag = Boolean.parseBoolean(rawArgs);
 				PDialog.pDialogObj.setCancelable(flag);
 				PDialog.pDialogObj.setCanceledOnTouchOutside(flag);
 			};

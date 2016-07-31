@@ -1,4 +1,4 @@
-pDialog - A Native Android Progress Dialog Plugin for Cordova
+pDialog - A Native Android and iOS Progress Dialog Plugin for Cordova
 ======================
 
 ![pDialog1](http://i.imgur.com/LmAZa2d.png)
@@ -8,10 +8,11 @@ Requirements
 -------------
 - Android 4 or higher
 - Cordova 3.0 or higher
+- iOS 7.0 or higher
 
 Installation
 -------------
-    cordova plugin add cordova-plugin-pdialog
+    cordova plugin add https://github.com/orlleite/cordova-plugin-pdialog.git
     
 Simple Usage
 -------------
@@ -40,6 +41,7 @@ These are the valid options:
 
 `theme`: can be one of the following:
 `TRADITIONAL`, `DEVICE_DARK`, `DEVICE_LIGHT` (default), `HOLO_DARK`, `HOLO_LIGHT`
+* themes are not supported by iOS.
 
 
 `progressStyle`: can be one of the following:

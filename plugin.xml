@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-pdialog" version="2.0.1">
     <name>pDialog</name>
-    <description>An Android Progress Dialog Plugin for Cordova.</description>
+    <description>An Android and iOS Progress Dialog Plugin for Cordova.</description>
     <license>MIT</license>
     <engines>
         <engine name="cordova" version=">=3.0.0" />
@@ -17,5 +17,15 @@
                 <param name="android-package" value="io.github.pwlin.cordova.plugins.pdialog.PDialog" />
             </feature>
         </config-file>
+    </platform>
+    
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="PDialog">
+                <param name="ios-package" value="PDialog"/>
+            </feature>
+        </config-file>
+        <header-file src="src/ios/PDialog.h" />
+        <source-file src="src/ios/PDialog.m" />
     </platform>
 </plugin>
