@@ -83,7 +83,7 @@ public class PDialog extends CordovaPlugin {
 		Runnable runnable = new Runnable() {
 			@Override
 			public void run() {
-				if (PDialog.pDialogObj != null) {
+				if (PDialog.pDialogObj != null && PDialog.pDialogObj.isShowing()) {
 					PDialog.pDialogObj.dismiss();
 					PDialog.pDialogObj = null;
 				}
@@ -189,8 +189,10 @@ public class PDialog extends CordovaPlugin {
 		Runnable runnable = new Runnable() {
 			@Override
 			public void run() {
-				int value = Integer.parseInt(rawArgs);
-				PDialog.pDialogObj.setProgress(value);
+				if (!"[]".equals(rawArgs)) {
+					int value = Integer.parseInt(rawArgs);
+					PDialog.pDialogObj.setProgress(value);
+				}
 			};
 		};
 		this.cordova.getActivity().runOnUiThread(runnable);
