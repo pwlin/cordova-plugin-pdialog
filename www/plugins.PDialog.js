@@ -43,13 +43,16 @@ function PDialog() {}
  *
  *  "message": contents of the progress dialog (defaults to empty)
  *
+ *  "format": the small text showing current and maximum units of progress (defaults to %1d/%2d)
+ *
  *  @example
  *  cordova.plugin.pDialog.init({
  *      theme : 'HOLO_DARK',
  *      progressStyle: 'SPINNER',
  *      cancelable : false,
  *      title: 'Please Wait...',
- *      message: 'Contacting server ...'
+ *      message: 'Contacting server ...',
+ *      format: '%1d - %2d'
  *  });
  *
  */
@@ -111,5 +114,14 @@ PDialog.prototype.setCancelable = function (flag) {
     exec(null, null, 'PDialog', 'setCancelable', flag);
     return this;
 };
+
+/**
+ * Change the format of the small text showing current and maximum units of progress.
+ * @param {String} format
+ */
+PDialog.prototype.setProgressNumberFormat = function (format) {
+    exec(null, null, 'PDialog', 'setProgressNumberFormat', format);
+    return this;
+}
 
 module.exports = new PDialog();

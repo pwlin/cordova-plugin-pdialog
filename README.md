@@ -12,7 +12,7 @@ Requirements
 Installation
 -------------
     cordova plugin add cordova-plugin-pdialog
-    
+
 Simple Usage
 -------------
 show:
@@ -51,12 +51,15 @@ These are the valid options:
 
 `message`: contents of the progress dialog (defaults to empty)
 
+`format`: the small text showing current and maximum units of progress (defaults to %1d/%2d)
+
     cordova.plugin.pDialog.init({
         theme : 'HOLO_DARK',
         progressStyle : 'SPINNER',
         cancelable : true,
         title : 'Please Wait...',
-        message : 'Contacting server ...'
+        message : 'Contacting server ...',
+        format: '%1d - %2d'
     });
 
 ###.dismiss()
@@ -68,31 +71,38 @@ Dismiss the progress dialog.
 ###.setProgress(_int_)
 
 Set the value of the progress bar when progressStyle is `HORIZONTAL`.
-    
+
     cordova.plugin.pDialog.init({progressStyle : 'HORIZONTAL', title: 'Please Wait...', message : 'Connecting to server...'});
     cordova.plugin.pDialog.setProgress(25);
-    
+
 ![pDialog2](http://i.imgur.com/7k2docz.png)
 
 
 ###.setTitle(_title_)
 
 Set the title of the progress dialog.
-    
+
     cordova.plugin.pDialog.setTitle('Please Wait...');
-    
+
 ###.setMessage(_message_)
 
 Set the message of the progress dialog
 
-    cordova.plugin.pDialog.setMessage('Connecting to server...');   
-    
+    cordova.plugin.pDialog.setMessage('Connecting to server...');
+
 ###.setCancelable(_boolean_)
 
 Set whether the progress dialog is calncelable or not (defaults to `true`)
 
-    cordova.plugin.pDialog.setCancelable(false); // The user can not cancel the progress dialog  
-    
+    cordova.plugin.pDialog.setCancelable(false); // The user can not cancel the progress dialog
+
+###.setProgressNukberFormat(_format_)
+
+Set the text showing the current and maximum units of progress
+
+    cordova.plugin.pDialog.setProgressNumberFormat('%1d - %2d');
+
+
 
 Chaining The Functions
 -----------------------
@@ -131,4 +141,4 @@ COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-    
+
